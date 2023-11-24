@@ -1,4 +1,4 @@
-import 'package:fifa_world_cup_app/app/core/styles/colors_app.dart';
+import 'package:fifa_world_cup_app/app/core/ui/styles/colors_app.dart';
 import 'package:flutter/widgets.dart';
 
 class TextAppStyles {

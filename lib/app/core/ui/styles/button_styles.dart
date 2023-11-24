@@ -1,5 +1,5 @@
-import 'package:fifa_world_cup_app/app/core/styles/colors_app.dart';
-import 'package:fifa_world_cup_app/app/core/styles/text_app_styles.dart';
+import 'package:fifa_world_cup_app/app/core/ui/styles/colors_app.dart';
+import 'package:fifa_world_cup_app/app/core/ui/styles/text_app_styles.dart';
 import 'package:flutter/material.dart';
 
 class ButtonStyles {

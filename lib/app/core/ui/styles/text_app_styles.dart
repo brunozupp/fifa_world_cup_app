@@ -1,4 +1,5 @@
 import 'package:fifa_world_cup_app/app/core/ui/styles/colors_app.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class TextAppStyles {
@@ -72,6 +73,11 @@ class TextAppStyles {
 
   TextStyle get labelTextField => textSecondaryFontRegular.copyWith(
     color: ColorsApp.i.greyDark,
+  );
+
+  TextStyle get titleWhite => textPrimaryFontBold.copyWith(
+    color: Colors.white,
+    fontSize: 22,
   );
 
   

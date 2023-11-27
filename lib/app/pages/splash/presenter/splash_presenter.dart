@@ -1,9 +1,9 @@
 import 'package:fifa_world_cup_app/app/pages/splash/presenter/i_splash_presenter.dart';
-import 'package:fifa_world_cup_app/app/pages/splash/view/splash_view.dart';
+import 'package:fifa_world_cup_app/app/pages/splash/view/i_splash_view.dart';
 
 class SplashPresenter implements ISplashPresenter {
 
-  late final SplashView _view;
+  late final ISplashView _view;
 
   @override
   Future<void> checkLogin() async {

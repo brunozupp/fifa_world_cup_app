@@ -80,6 +80,11 @@ class TextAppStyles {
     fontSize: 22,
   );
 
+  TextStyle get titleBlack => textPrimaryFontBold.copyWith(
+    color: Colors.black,
+    fontSize: 22,
+  );
+
   
 }
 

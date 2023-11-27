@@ -2,6 +2,7 @@ import 'package:fifa_world_cup_app/app/core/ui/styles/button_styles.dart';
 import 'package:fifa_world_cup_app/app/core/ui/styles/colors_app.dart';
 import 'package:fifa_world_cup_app/app/core/ui/styles/text_app_styles.dart';
 import 'package:fifa_world_cup_app/app/core/ui/widgets/app_button.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -108,6 +109,9 @@ class _LoginPageState extends State<LoginPage> {
                             style: context.textStyles.textSecondaryFontMedium.copyWith(
                               color: context.colors.yellow,
                             ),
+                            recognizer: TapGestureRecognizer()..onTap = () {
+                              Navigator.of(context).pushNamed("/auth/register");
+                            }
                           ),
                         ],
                       ),

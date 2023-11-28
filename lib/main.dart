@@ -6,5 +6,5 @@ Future<void> main() async {
 
   await Env.i.load();
 
-  runApp(const FifaApp());
+  runApp(FifaApp());
 }

@@ -108,7 +108,9 @@ class _HomePageState extends HomeView {
                         height: 20,
                       ),
                       AppButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).pushNamed("/my-stickers");
+                        },
                         width: size.width * 0.9,
                         style: context.buttonStyles.yellowOutlineButton, 
                         labelStyle: context.textStyles.textSecondaryFontExtraBold.copyWith(

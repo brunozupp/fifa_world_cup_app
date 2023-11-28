@@ -2,17 +2,34 @@ import 'package:fifa_world_cup_app/app/core/ui/styles/button_styles.dart';
 import 'package:fifa_world_cup_app/app/core/ui/styles/colors_app.dart';
 import 'package:fifa_world_cup_app/app/core/ui/styles/text_app_styles.dart';
 import 'package:fifa_world_cup_app/app/core/ui/widgets/app_button.dart';
+import 'package:fifa_world_cup_app/app/pages/auth/login/presenter/i_login_presenter.dart';
+import 'package:fifa_world_cup_app/app/pages/auth/login/view/login_view.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:validatorless/validatorless.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+
+  final ILoginPresenter presenter;
+
+  const LoginPage({super.key, required this.presenter});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginPageState extends LoginView {
+
+  final _formKey = GlobalKey<FormState>();
+  final _emailEC = TextEditingController();
+  final _passwordEC = TextEditingController();
+
+  @override
+  void dispose() {
+    _emailEC.dispose();
+    _passwordEC.dispose();
+    super.dispose();
+  }
   
   @override
   Widget build(BuildContext context) {
@@ -22,6 +39,7 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       backgroundColor: context.colors.primary,
       body: Form(
+        key: _formKey,
         child: Container(
           padding: const EdgeInsets.all(10),
           decoration: const BoxDecoration(
@@ -51,19 +69,30 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                   TextFormField(
-                    decoration: InputDecoration(
+                    controller: _emailEC,
+                    decoration: const InputDecoration(
                       label: Text("Email"),
                       floatingLabelBehavior: FloatingLabelBehavior.never
                     ),
+                    validator: Validatorless.multiple([
+                      Validatorless.required("Obrigatório"),
+                      Validatorless.email("Email inválido"),
+                    ]),
                   ),
                   const SizedBox(
                     height: 20,
                   ),
                   TextFormField(
+                    controller: _passwordEC,
+                    obscureText: true,
                     decoration: const InputDecoration(
                       label: Text("Senha"),
                       floatingLabelBehavior: FloatingLabelBehavior.never
                     ),
+                    validator: Validatorless.multiple([
+                      Validatorless.required("Obrigatório"),
+                      Validatorless.min(6, "Senha deve ter pelo menos 6 caracteres"),
+                    ]),
                   ),
                   const SizedBox(
                     height: 20,
@@ -88,7 +117,20 @@ class _LoginPageState extends State<LoginPage> {
                     style: context.buttonStyles.yellowButton,
                     labelStyle: context.textStyles.textSecondaryFontExtraBoldPrimaryColor,
                     label: "Entrar",
-                    onPressed: () {},
+                    onPressed: () {
+                      
+                      final validate = _formKey.currentState?.validate() ?? false;
+
+                      if(validate) {
+
+                        showLoader();
+
+                        widget.presenter.login(
+                          email: _emailEC.text,
+                          password: _passwordEC.text,
+                        );
+                      } 
+                    },
                   ),
                 ])
               ),

@@ -1,6 +1,7 @@
 import 'package:fifa_world_cup_app/app/core/rest/custom_dio.dart';
 import 'package:fifa_world_cup_app/app/core/ui/theme/theme_config.dart';
 import 'package:fifa_world_cup_app/app/pages/auth/login/login_page.dart';
+import 'package:fifa_world_cup_app/app/pages/auth/login/login_route.dart';
 import 'package:fifa_world_cup_app/app/pages/auth/register/register_page.dart';
 import 'package:fifa_world_cup_app/app/pages/auth/register/register_route.dart';
 import 'package:fifa_world_cup_app/app/pages/home/home_page.dart';
@@ -27,7 +28,7 @@ class FifaApp extends StatelessWidget {
         theme: ThemeConfig.theme,
         routes: {
           "/": (_) => const SplashRoute(),
-          "/auth/login": (_) => const LoginPage(),
+          "/auth/login": (_) => const LoginRoute(),
           "/auth/register": (_) => const RegisterRoute(),
           "/home": (_) => const HomePage(),
         },

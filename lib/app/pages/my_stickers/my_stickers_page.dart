@@ -1,5 +1,6 @@
 import 'package:fifa_world_cup_app/app/pages/my_stickers/presenter/i_my_stickers_presenter.dart';
 import 'package:fifa_world_cup_app/app/pages/my_stickers/view/my_stickers_view.dart';
+import 'package:fifa_world_cup_app/app/pages/my_stickers/widgets/sticker_group.dart';
 import 'package:fifa_world_cup_app/app/pages/my_stickers/widgets/sticker_group_filter.dart';
 import 'package:fifa_world_cup_app/app/pages/my_stickers/widgets/sticker_status_filter.dart';
 import 'package:flutter/material.dart';
@@ -34,6 +35,14 @@ class _MyStickersPageState extends MyStickersView {
                 ),
                 StickerGroupFilter(),
               ],
+            ),
+          ),
+          SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (context, index) {
+                return StickerGroup();
+              },
+              childCount: 10,
             ),
           ),
         ],

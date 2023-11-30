@@ -7,8 +7,9 @@ import 'package:flutter/material.dart';
 class StickerGroup extends StatelessWidget {
 
   final GroupsStickers group;
+  final String statusFilter;
 
-  const StickerGroup({super.key, required this.group});
+  const StickerGroup({super.key, required this.group, required this.statusFilter,});
 
   @override
   Widget build(BuildContext context) {
@@ -60,17 +61,32 @@ class StickerGroup extends StatelessWidget {
               final stickerNumber = "${group.stickersStart + index}";
               final stickerList = group.stickers.where((sticker) => sticker.stickerNumber == stickerNumber);
 
+              // Indica que não tem a figurinha
               final sticker = stickerList.firstOrNull;
 
               final countryName = group.countryName;
               final countryCode = group.countryCode;
 
-              return _Sticker(
+              final stickerWidget =  _Sticker(
                 index: stickerNumber,
                 sticker: sticker,
                 countryName: countryName,
                 countryCode: countryCode,
               );
+
+              if(statusFilter == "all") {
+                return stickerWidget;
+              } else if(statusFilter == "missing") {
+                if(sticker == null) {
+                  return stickerWidget;
+                }
+              } else if(statusFilter == "repeated") {
+                if(sticker != null && sticker.duplicate > 0) {
+                  return stickerWidget;
+                }
+              }
+
+              return const SizedBox.shrink();
             },
           )
         ],

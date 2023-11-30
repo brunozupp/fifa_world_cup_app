@@ -4,4 +4,6 @@ import 'package:fifa_world_cup_app/app/pages/my_stickers/view/i_my_stickers_view
 abstract class IMyStickersPresenter implements FwcPresenter<IMyStickersView> {
 
   Future<void> getMyAlbum();
+
+  Future<void> statusFilter(String status);
 }

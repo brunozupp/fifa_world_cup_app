@@ -15,6 +15,8 @@ class MyStickersPresenter implements IMyStickersPresenter {
 
   List<GroupsStickers> album = [];
   
+  var statusSelected = "all";
+  
   @override
   set view(IMyStickersView view) {
     _view = view;
@@ -30,6 +32,12 @@ class MyStickersPresenter implements IMyStickersPresenter {
     } catch (e) {
       _view.error("Erro ao carregar os dados");
     }
+  }
+  
+  @override
+  Future<void> statusFilter(String status) async {
+    statusSelected = status;
+    _view.updateStatusFilter(status);
   }
   
 }

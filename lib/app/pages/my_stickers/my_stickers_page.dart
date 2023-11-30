@@ -31,7 +31,7 @@ class _MyStickersPageState extends MyStickersView {
             child: Column(
               children: [
                 StickerStatusFilter(
-                  filterSelected: "",
+                  filterSelected: statusFilter,
                 ),
                 StickerGroupFilter(),
               ],
@@ -44,6 +44,7 @@ class _MyStickersPageState extends MyStickersView {
 
                 return StickerGroup(
                   group: group,
+                  statusFilter: statusFilter,
                 );
               },
               childCount: album.length,

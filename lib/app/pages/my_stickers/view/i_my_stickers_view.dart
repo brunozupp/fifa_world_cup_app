@@ -5,4 +5,6 @@ abstract class IMyStickersView {
   void loadPage(List<GroupsStickers> album);
 
   void error(String message);
+
+  void updateStatusFilter(String status);
 }

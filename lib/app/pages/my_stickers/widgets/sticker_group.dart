@@ -115,7 +115,9 @@ class _Sticker extends StatelessWidget {
     final hasSticker = sticker != null;
 
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        Navigator.of(context).pushNamed("/sticker-detail");
+      },
       child: Container(
         color: hasSticker
           ? context.colors.primary

@@ -33,7 +33,9 @@ class _MyStickersPageState extends MyStickersView {
                 StickerStatusFilter(
                   filterSelected: statusFilter,
                 ),
-                StickerGroupFilter(),
+                StickerGroupFilter(
+                  countries: countries, 
+                ),
               ],
             ),
           ),

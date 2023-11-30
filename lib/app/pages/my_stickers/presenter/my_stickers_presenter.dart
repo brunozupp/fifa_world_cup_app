@@ -14,8 +14,8 @@ class MyStickersPresenter implements IMyStickersPresenter {
   late final IMyStickersView _view;
 
   List<GroupsStickers> album = [];
-  
   var statusSelected = "all";
+  List<String>? countries;
   
   @override
   set view(IMyStickersView view) {
@@ -38,6 +38,18 @@ class MyStickersPresenter implements IMyStickersPresenter {
   Future<void> statusFilter(String status) async {
     statusSelected = status;
     _view.updateStatusFilter(status);
+  }
+  
+  @override
+  void countryFilter(List<String>? countries) {
+    this.countries = countries;
+
+    if(countries == null) {
+      _view.updateAlbum(album);
+    } else {
+      final albumFiltered = [...album.where((sticker) => countries.contains(sticker.countryCode))];
+      _view.updateAlbum(albumFiltered);
+    }
   }
   
 }

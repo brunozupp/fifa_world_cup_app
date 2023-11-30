@@ -6,4 +6,6 @@ abstract class IMyStickersPresenter implements FwcPresenter<IMyStickersView> {
   Future<void> getMyAlbum();
 
   Future<void> statusFilter(String status);
+
+  void countryFilter(List<String>? countries);
 }

@@ -11,6 +11,7 @@ abstract class MyStickersView extends State<MyStickersPage> with AppLoader, AppM
 
   List<GroupsStickers> album = [];
   var statusFilter = 'all';
+  var countries = <String, String>{};
 
   @override
   void initState() {
@@ -29,6 +30,10 @@ abstract class MyStickersView extends State<MyStickersPage> with AppLoader, AppM
     hideLoader();
     setState(() {
       this.album = album;
+      countries = {
+        for(final item in album)
+          item.countryCode : item.countryName,
+      };
     });
   }
 
@@ -42,6 +47,14 @@ abstract class MyStickersView extends State<MyStickersPage> with AppLoader, AppM
   void updateStatusFilter(String status) {
     setState(() {
       statusFilter = status;
+    });
+  }
+
+  @override
+  void updateAlbum(List<GroupsStickers> album) {
+    hideLoader();
+    setState(() {
+      this.album = album;
     });
   }
 }

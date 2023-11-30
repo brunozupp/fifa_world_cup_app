@@ -4,7 +4,6 @@ import 'package:fifa_world_cup_app/app/core/ui/global/i_global_context.dart';
 import 'package:fifa_world_cup_app/app/core/ui/theme/theme_config.dart';
 import 'package:fifa_world_cup_app/app/pages/auth/login/login_route.dart';
 import 'package:fifa_world_cup_app/app/pages/auth/register/register_route.dart';
-import 'package:fifa_world_cup_app/app/pages/home/home_page.dart';
 import 'package:fifa_world_cup_app/app/pages/home/home_route.dart';
 import 'package:fifa_world_cup_app/app/pages/my_stickers/my_stickers_route.dart';
 import 'package:fifa_world_cup_app/app/pages/splash/splash_route.dart';

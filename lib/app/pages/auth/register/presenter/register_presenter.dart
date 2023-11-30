@@ -1,6 +1,5 @@
 import 'dart:developer';
 
-import 'package:fifa_world_cup_app/app/core/exceptions/repository_exception.dart';
 import 'package:fifa_world_cup_app/app/models/register_user_model.dart';
 import 'package:fifa_world_cup_app/app/pages/auth/register/presenter/i_register_presenter.dart';
 import 'package:fifa_world_cup_app/app/pages/auth/register/view/i_register_view.dart';

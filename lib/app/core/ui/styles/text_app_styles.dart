@@ -1,6 +1,5 @@
 import 'package:fifa_world_cup_app/app/core/ui/styles/colors_app.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class TextAppStyles {
   static TextAppStyles? _instance;

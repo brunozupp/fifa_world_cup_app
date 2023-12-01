@@ -2,16 +2,24 @@ import 'package:fifa_world_cup_app/app/core/ui/styles/button_styles.dart';
 import 'package:fifa_world_cup_app/app/core/ui/styles/text_app_styles.dart';
 import 'package:fifa_world_cup_app/app/core/ui/widgets/app_button.dart';
 import 'package:fifa_world_cup_app/app/core/ui/widgets/app_rounded_button.dart';
+import 'package:fifa_world_cup_app/app/pages/sticker_detail/presenter/i_sticker_detail_presenter.dart';
+import 'package:fifa_world_cup_app/app/pages/sticker_detail/view/sticker_detail_view.dart';
 import 'package:flutter/material.dart';
 
 class StickerDetailPage extends StatefulWidget {
-  const StickerDetailPage({super.key});
+
+  final IStickerDetailPresenter presenter;
+
+  const StickerDetailPage({
+    super.key,
+    required this.presenter,
+  });
 
   @override
   State<StickerDetailPage> createState() => _StickerDetailPageState();
 }
 
-class _StickerDetailPageState extends State<StickerDetailPage> {
+class _StickerDetailPageState extends StickerDetailView {
   @override
   Widget build(BuildContext context) {
 
@@ -27,13 +35,17 @@ class _StickerDetailPageState extends State<StickerDetailPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Image.asset("assets/images/sticker.png"),
+              Image.asset(
+                hasSticker
+                  ? "assets/images/sticker.png"
+                  : "assets/images/sticker_pb.png"
+              ),
               Row(
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(15.0),
                     child: Text(
-                      "BRA 17",
+                      "$countryCode $stickerNumber",
                       style: context.textStyles.textPrimaryFontBold.copyWith(
                         fontSize: 22,
                       ),
@@ -42,20 +54,20 @@ class _StickerDetailPageState extends State<StickerDetailPage> {
                   const Spacer(),
                   AppRoundedButton(
                     icon: Icons.remove, 
-                    onPressed: () {},
+                    onPressed: widget.presenter.decrementAmount,
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 15,
                     ),
                     child: Text(
-                      "1",
+                      "$amount",
                       style: context.textStyles.textSecondaryFontMedium,
                     ),
                   ),
                   AppRoundedButton(
                     icon: Icons.add, 
-                    onPressed: () {},
+                    onPressed: widget.presenter.incrementAmount,
                   ),
                 ],
               ),
@@ -66,7 +78,7 @@ class _StickerDetailPageState extends State<StickerDetailPage> {
                 ),
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  "Brasil",
+                  countryName,
                   style: context.textStyles.textPrimaryFontRegular,
                 ),
               ),

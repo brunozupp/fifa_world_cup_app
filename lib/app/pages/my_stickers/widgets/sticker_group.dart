@@ -116,7 +116,15 @@ class _Sticker extends StatelessWidget {
 
     return InkWell(
       onTap: () {
-        Navigator.of(context).pushNamed("/sticker-detail");
+        Navigator.of(context).pushNamed(
+          "/sticker-detail",
+          arguments: {
+            "countryCode": countryCode,
+            "stickerNumber": index,
+            "countryName": countryName,
+            "stickerUser": sticker,
+          }
+        );
       },
       child: Container(
         color: hasSticker

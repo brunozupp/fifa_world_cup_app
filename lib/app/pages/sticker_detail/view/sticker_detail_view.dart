@@ -66,4 +66,16 @@ abstract class StickerDetailView extends State<StickerDetailPage> with AppLoader
       this.amount = amount;
     });
   }
+
+  @override
+  void saveSuccess() {
+    hideLoader();
+    Navigator.of(context).pop();
+  }
+
+  @override
+  void error(String message) {
+    hideLoader();
+    showError(message);
+  }
 }

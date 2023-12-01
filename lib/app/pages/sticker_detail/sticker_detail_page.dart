@@ -84,10 +84,11 @@ class _StickerDetailPageState extends StickerDetailView {
               ),
               AppButton.primary(
                 width: size.width * .9,
-                label: "Adicionar figurinha",
-                onPressed: () {},
+                label: "${hasSticker ? 'Atualizar' : 'Adicionar'} figurinha",
+                onPressed: widget.presenter.saveSticker,
               ),
               AppButton(
+                onPressed: widget.presenter.deleteSticker,
                 style: context.buttonStyles.primaryOutlineButton,
                 labelStyle: context.textStyles.textSecondaryFontExtraBoldPrimaryColor,
                 label: "Excluir figurinha",

@@ -8,4 +8,10 @@ abstract class IStickerDetailView {
   });
 
   void updateAmount(int amount);
+
+  void showLoader();
+  
+  void saveSuccess();
+
+  void error(String message);
 }

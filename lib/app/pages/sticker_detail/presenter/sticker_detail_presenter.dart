@@ -2,15 +2,19 @@ import 'package:fifa_world_cup_app/app/models/sticker_model.dart';
 import 'package:fifa_world_cup_app/app/models/user_sticker_model.dart';
 import 'package:fifa_world_cup_app/app/pages/sticker_detail/presenter/i_sticker_detail_presenter.dart';
 import 'package:fifa_world_cup_app/app/pages/sticker_detail/view/i_sticker_detail_view.dart';
+import 'package:fifa_world_cup_app/app/repositories/stickers/i_stickers_repository.dart';
 import 'package:fifa_world_cup_app/app/services/sticker/i_find_sticker_service.dart';
 
 class StickerDetailPresenter implements IStickerDetailPresenter {
 
-  final IFindStickerService findStickerService;
+  final IFindStickerService _findStickerService;
+  final IStickersRepository _stickersRepository;
 
   StickerDetailPresenter({
-    required this.findStickerService,
-  });
+    required IFindStickerService findStickerService,
+    required IStickersRepository stickersRepository,
+  })  : _findStickerService = findStickerService,
+        _stickersRepository = stickersRepository;
 
   late final IStickerDetailView _view;
 
@@ -35,7 +39,7 @@ class StickerDetailPresenter implements IStickerDetailPresenter {
     this.stickerUser = stickerUser;
 
     if(stickerUser == null) {
-      sticker = await findStickerService.execute(countryCode, stickerNumber);
+      sticker = await _findStickerService.execute(countryCode, stickerNumber);
     }
 
     bool hasSticker = stickerUser != null;
@@ -66,6 +70,39 @@ class StickerDetailPresenter implements IStickerDetailPresenter {
   void incrementAmount() {
     amount += 1;
     _view.updateAmount(amount);
+  }
+  
+  @override
+  Future<void> saveSticker() async {
+    try {
+      _view.showLoader();
+
+      if (stickerUser == null) {
+        await _stickersRepository.registerUserSticker(sticker!.id, amount);
+      } else {
+        await _stickersRepository.updateUserSticker(stickerUser!.idSticker, amount);
+      }
+
+      _view.saveSuccess();
+    } catch (e) {
+      _view.error("Erro ao atualizar ou cadastrar figurinha");
+    }
+  }
+  
+  @override
+  Future<void> deleteSticker() async {
+    
+    try {
+      _view.showLoader();
+
+      if (stickerUser != null) {
+        await _stickersRepository.updateUserSticker(stickerUser!.idSticker, 0);
+      }
+
+      _view.saveSuccess();
+    } catch (e) {
+      _view.error("Erro ao deletar figurinha");
+    }
   }
   
 }

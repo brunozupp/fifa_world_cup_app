@@ -86,4 +86,38 @@ class StickersRepository implements IStickersRepository {
     }
   }
   
+  @override
+  Future<void> registerUserSticker(int stickerId, int amount) async {
+    try {
+      await _dio.auth().post("/api/user/sticker", data: {
+        "id_sticker": stickerId,
+        "amount": amount,
+      });
+    } on DioException catch (e, s) {
+
+      const errorMessage = "Erro ao inserir figurinha no álbum do usuário";
+
+      log(errorMessage, error: e, stackTrace: s);
+
+      throw RepositoryException(message: errorMessage);
+    }
+  }
+  
+  @override
+  Future<void> updateUserSticker(int stickerId, int amount) async {
+    try {
+      await _dio.auth().put("/api/user/sticker", data: {
+        "id_sticker": stickerId,
+        "amount": amount,
+      });
+    } on DioException catch (e, s) {
+
+      const errorMessage = "Erro ao atualizar figurinha no álbum do usuário";
+
+      log(errorMessage, error: e, stackTrace: s);
+
+      throw RepositoryException(message: errorMessage);
+    }
+  }
+  
 }

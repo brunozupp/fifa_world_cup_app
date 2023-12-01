@@ -15,4 +15,8 @@ abstract class IStickerDetailPresenter extends FwcPresenter<IStickerDetailView> 
   void incrementAmount();
 
   void decrementAmount();
+
+  Future<void> saveSticker();
+
+  Future<void> deleteSticker();
 }

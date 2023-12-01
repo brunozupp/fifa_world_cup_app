@@ -9,4 +9,6 @@ abstract class IMyStickersView {
   void updateStatusFilter(String status);
 
   void updateAlbum(List<GroupsStickers> album);
+
+  void showLoader();
 }

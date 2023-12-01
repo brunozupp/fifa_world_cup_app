@@ -2,7 +2,10 @@ import 'package:fifa_world_cup_app/app/core/ui/styles/colors_app.dart';
 import 'package:fifa_world_cup_app/app/core/ui/styles/text_app_styles.dart';
 import 'package:fifa_world_cup_app/app/models/groups_stickers.dart';
 import 'package:fifa_world_cup_app/app/models/user_sticker_model.dart';
+import 'package:fifa_world_cup_app/app/pages/my_stickers/presenter/i_my_stickers_presenter.dart';
+import 'package:fifa_world_cup_app/app/pages/sticker_detail/presenter/i_sticker_detail_presenter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_getit/flutter_getit.dart';
 
 class StickerGroup extends StatelessWidget {
 
@@ -68,7 +71,7 @@ class StickerGroup extends StatelessWidget {
               final countryCode = group.countryCode;
 
               final stickerWidget =  _Sticker(
-                index: stickerNumber,
+                stickerNumber: stickerNumber,
                 sticker: sticker,
                 countryName: countryName,
                 countryCode: countryCode,
@@ -98,13 +101,13 @@ class StickerGroup extends StatelessWidget {
 class _Sticker extends StatelessWidget {
   
   final UserStickerModel? sticker;
-  final String index;
+  final String stickerNumber;
   final String countryName;
   final String countryCode;
   
   const _Sticker({
     required this.sticker,
-    required this.index,
+    required this.stickerNumber,
     required this.countryName,
     required this.countryCode,
   });
@@ -115,16 +118,20 @@ class _Sticker extends StatelessWidget {
     final hasSticker = sticker != null;
 
     return InkWell(
-      onTap: () {
-        Navigator.of(context).pushNamed(
+      onTap: () async {
+        await Navigator.of(context).pushNamed(
           "/sticker-detail",
           arguments: {
             "countryCode": countryCode,
-            "stickerNumber": index,
+            "stickerNumber": stickerNumber,
             "countryName": countryName,
             "stickerUser": sticker,
           }
         );
+
+        final presenter = context.get<IMyStickersPresenter>();
+      
+        presenter.refresh();
       },
       child: Container(
         color: hasSticker
@@ -155,7 +162,7 @@ class _Sticker extends StatelessWidget {
               ),
             ),
             Text(
-              index,
+              stickerNumber,
               style: context.textStyles.textSecondaryFontExtraBold.copyWith(
                 color: hasSticker ? Colors.white : Colors.black,
               ),
